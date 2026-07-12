@@ -1,10 +1,13 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+
+import { motion } from "framer-motion";
+
+import type { AssetFile } from "@/app/api/assets/route";
+
 import SectionWrapper from "../ui/section-wrapper";
 import { SectionHeader } from "./section-header";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import type { AssetFile } from "@/app/api/assets/route";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -18,6 +21,7 @@ const ABOUT_FOLDER = "assets/about";
 
 // ─── Photo rail ───────────────────────────────────────────────────────────────
 
+/** Auto-scrolling vertical photo strip with seamless wraparound, driven by wheel/touch input. */
 const PhotoRail = ({ photos }: { photos: string[] }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -147,6 +151,7 @@ const PortraitSlot = ({ src }: { src: string }) => {
 
 // ─── Section ─────────────────────────────────────────────────────────────────
 
+/** "About" section: bio copy plus a portrait and auto-discovered photo rail. */
 const AboutSection = () => {
   const [railSrcs, setRailSrcs] = useState<string[]>([]);
 

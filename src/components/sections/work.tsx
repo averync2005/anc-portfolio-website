@@ -1,16 +1,19 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ExternalLink } from "lucide-react";
-import Link from "next/link";
+
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import SectionWrapper from "../ui/section-wrapper";
-import { SectionHeader } from "./section-header";
 import work, { WorkItem, WorkMedia } from "@/data/work";
 import { useAssetFolder } from "@/hooks/use-asset-folder";
 import type { AssetFile } from "@/app/api/assets/route";
+
+import SectionWrapper from "../ui/section-wrapper";
+import { SectionHeader } from "./section-header";
 
 // ─── Section ─────────────────────────────────────────────────────────────────
 
@@ -32,6 +35,7 @@ const WorkSection = () => {
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
+/** Expandable card for a single work-history item, lazily loading its asset folder on first open. */
 const WorkCard = ({ item, index }: { item: WorkItem; index: number }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -177,6 +181,7 @@ const DiscoveredAssets = ({ files }: { files: AssetFile[] }) => {
 
 // ─── Explicit media renderer ──────────────────────────────────────────────────
 
+/** Renders one work-item media entry, dispatching on its `type` (youtube, slides, link, photo(s)). */
 const MediaItem = ({ media }: { media: WorkMedia }) => {
   switch (media.type) {
     case "youtube":
