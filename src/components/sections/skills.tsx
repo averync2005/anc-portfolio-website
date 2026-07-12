@@ -1,7 +1,11 @@
 "use client";
 import { useState } from "react";
+
 import { motion, AnimatePresence } from "framer-motion";
+
 import { SKILLS, Skill, SkillNames } from "@/data/constants";
+import { useMediaQuery } from "@/hooks/use-media-query";
+
 import SectionWrapper from "../ui/section-wrapper";
 import { SectionHeader } from "./section-header";
 import { useMediaQuery } from "@/hooks/use-media-query";
@@ -35,6 +39,7 @@ const CATEGORIES: { label: string; ids: SkillNames[] }[] = [
 
 const INVERT_IN_DARK = new Set(["github", "express", "ros"]);
 
+// Standard relative-luminance weighting, used to pick a readable icon/text color per skill's brand hex
 const luminance = (hex: string) => {
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
@@ -80,6 +85,7 @@ const SkillIcon = ({ skill }: { skill: Skill }) => {
 const readableColor = (hex: string) =>
   luminance(hex) >= 60 ? hex : undefined;
 
+/** "Skills" section: categorized skill chips with a hover/tap-to-reveal description. */
 export default function SkillsSection() {
   const [activeSkill, setActiveSkill] = useState<Skill | null>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
