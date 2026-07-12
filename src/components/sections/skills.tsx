@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SKILLS, Skill, SkillNames } from "@/data/constants";
 import SectionWrapper from "../ui/section-wrapper";
 import { SectionHeader } from "./section-header";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 const CATEGORIES: { label: string; ids: SkillNames[] }[] = [
   {
@@ -81,6 +82,7 @@ const readableColor = (hex: string) =>
 
 export default function SkillsSection() {
   const [activeSkill, setActiveSkill] = useState<Skill | null>(null);
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
     <SectionWrapper
@@ -89,7 +91,7 @@ export default function SkillsSection() {
     >
       <SectionHeader id="skills" title="Skills" className="mb-14" />
 
-      <div className="space-y-7" onMouseLeave={() => setActiveSkill(null)}>
+      <div className="space-y-7" onMouseLeave={() => !isMobile && setActiveSkill(null)}>
         {CATEGORIES.map((cat, catIdx) => (
           <motion.div
             key={cat.label}
@@ -111,6 +113,7 @@ export default function SkillsSection() {
                   <div
                     key={id}
                     onMouseEnter={() => setActiveSkill(skill)}
+                    onClick={() => setActiveSkill(activeSkill?.name === skill.name ? null : skill)}
                     className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-secondary/20 hover:bg-secondary/40 transition-all duration-200 cursor-default"
                     style={{
                       borderColor: isActive ? `${skill.color}70` : undefined,
@@ -159,7 +162,7 @@ export default function SkillsSection() {
               transition={{ duration: 0.2 }}
               className="text-sm text-muted-foreground/30"
             >
-              Hover a skill to learn more
+              {isMobile ? "Tap a skill to learn more" : "Hover a skill to learn more"}
             </motion.p>
           )}
         </AnimatePresence>

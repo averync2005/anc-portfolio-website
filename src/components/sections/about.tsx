@@ -24,6 +24,7 @@ const PhotoRail = ({ photos }: { photos: string[] }) => {
   const currentRef = useRef(0);
   const targetRef = useRef(0);
   const frameRef = useRef<number | null>(null);
+  const touchStartYRef = useRef(0);
 
   // Two copies for seamless circular wrap
   const looped = useMemo(() => [...photos, ...photos], [photos]);
@@ -45,6 +46,17 @@ const PhotoRail = ({ photos }: { photos: string[] }) => {
       e.preventDefault();
       e.stopPropagation();
       targetRef.current += e.deltaY;
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartYRef.current = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+      const deltaY = touchStartYRef.current - e.touches[0].clientY;
+      targetRef.current += deltaY;
+      touchStartYRef.current = e.touches[0].clientY;
     };
 
     const tick = () => {
@@ -69,9 +81,13 @@ const PhotoRail = ({ photos }: { photos: string[] }) => {
 
     frameRef.current = requestAnimationFrame(tick);
     container.addEventListener("wheel", handleWheel, { passive: false });
+    container.addEventListener("touchstart", handleTouchStart, { passive: true });
+    container.addEventListener("touchmove", handleTouchMove, { passive: false });
 
     return () => {
       container.removeEventListener("wheel", handleWheel);
+      container.removeEventListener("touchstart", handleTouchStart);
+      container.removeEventListener("touchmove", handleTouchMove);
       if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
     };
   }, []);
@@ -83,6 +99,7 @@ const PhotoRail = ({ photos }: { photos: string[] }) => {
       ref={containerRef}
       className="overflow-hidden max-h-[25rem] rounded-b-xl"
       style={{ touchAction: "none" }}
+      data-lenis-prevent
     >
       {/* pb-3 matches gap-3 so scrollHeight/2 is exactly one copy's repeat height */}
       <div

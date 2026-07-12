@@ -158,7 +158,7 @@ const DiscoveredAssets = ({ files }: { files: AssetFile[] }) => {
         </div>
       )}
       {images.length > 1 && (
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {images.map((f) => (
             <div key={f.src} className="rounded-xl overflow-hidden border border-border">
               <img src={f.src} alt="" className="w-full h-auto" />
@@ -213,7 +213,7 @@ const MediaItem = ({ media }: { media: WorkMedia }) => {
       return (
         <div className="space-y-2">
           {media.sidePhoto ? (
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {slideIframe}
               <div className="rounded-xl overflow-hidden border border-border">
                 <img src={media.sidePhoto} alt="" className="w-full h-full object-cover" />
@@ -254,12 +254,14 @@ const MediaItem = ({ media }: { media: WorkMedia }) => {
         </div>
       );
 
-    case "photo-grid":
+    case "photo-grid": {
+      const colClass =
+        media.columns <= 1 ? "grid-cols-1" :
+        media.columns === 2 ? "grid-cols-1 sm:grid-cols-2" :
+        media.columns === 3 ? "grid-cols-1 sm:grid-cols-3" :
+        "grid-cols-2 sm:grid-cols-4";
       return (
-        <div
-          className="grid gap-2"
-          style={{ gridTemplateColumns: `repeat(${media.columns}, 1fr)` }}
-        >
+        <div className={`grid gap-2 ${colClass}`}>
           {media.srcs.map((src, i) => (
             <div key={i} className="aspect-[4/3] rounded-xl overflow-hidden border border-border">
               <img src={src} alt="" className="w-full h-full object-cover" />
@@ -267,6 +269,7 @@ const MediaItem = ({ media }: { media: WorkMedia }) => {
           ))}
         </div>
       );
+    }
 
     case "photo-placeholder":
       return (

@@ -52,12 +52,12 @@ const HeroSection = () => {
                       <h1
                         className={cn(
                           "-ml-[6px] leading-none font-thin text-slate-900 dark:text-white text-left",
-                          "font-thin text-7xl md:text-7xl lg:text-8xl xl:text-9xl",
+                          "font-thin text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl",
                           "cursor-default font-display"
                         )}
                       >
                         {config.author.split(" ")[0]}
-                        <br className="md:block hiidden" />
+                        <br className="md:block hidden" />
                         {config.author.split(" ")[1]}
                       </h1>
                     </TooltipTrigger>
@@ -74,7 +74,7 @@ const HeroSection = () => {
                   <p
                     className={cn(
                       "md:self-start md:mt-4 font-thin text-md text-slate-600 dark:text-slate-300",
-                      "cursor-default font-display sm:text-xl md:text-xl whitespace-nowrap bg-clip-text "
+                      "cursor-default font-display sm:text-xl md:text-xl bg-clip-text "
                     )}
                   >
                     Engineer · Builder · Leader
