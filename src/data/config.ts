@@ -37,6 +37,8 @@ const config = {
   social: {
     linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL ?? "https://www.linkedin.com/in/averynudellcook/",
     github: process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com/averync2005",
+    twitter: undefined as string | undefined,
+    instagram: undefined as string | undefined,
   },
 };
 export { config };
