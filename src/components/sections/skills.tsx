@@ -8,7 +8,6 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 
 import SectionWrapper from "../ui/section-wrapper";
 import { SectionHeader } from "./section-header";
-import { useMediaQuery } from "@/hooks/use-media-query";
 
 const CATEGORIES: { label: string; ids: SkillNames[] }[] = [
   {
