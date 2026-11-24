@@ -1,16 +1,40 @@
+/**
+ * Root layout (page metadata, fonts, global providers and overlays)
+ * - Share-preview image comes from app/opengraph-image.tsx (Next picks it up automatically)
+ */
+
+
+
+
+// ---------------------------------
+// Imports
+// ---------------------------------
+
+// Next and fonts
 import type { Metadata } from "next";
 import { Inter, Archivo_Black } from "next/font/google";
 import "./globals.css";
-import { config } from "@/data/config";
+
+// Analytics
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
+// Content and components
+import { config } from "@/data/config";
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
 import AppOverlays from "@/components/app-overlays";
 import { Providers } from "@/components/providers";
 
+
+
+
+// ---------------------------------
+// Metadata
+// ---------------------------------
+
 export const metadata: Metadata = {
+  metadataBase: new URL(config.site),  // Resolves the generated preview image to an absolute URL
   title: config.title,
   description: config.description.long,
   keywords: config.keywords,
@@ -19,48 +43,51 @@ export const metadata: Metadata = {
     title: config.title,
     description: config.description.short,
     url: config.site,
-    images: [
-      {
-        url: config.ogImg,
-        width: 800,
-        height: 600,
-        alt: "Portfolio preview",
-      },
-    ],
-    type: "website",
+    siteName: config.author,
+    type: "website"
   },
   twitter: {
     card: "summary_large_image",
     title: config.title,
-    description: config.description.short,
-    images: [config.ogImg],
+    description: config.description.short
   },
   robots: {
     index: true,
-    follow: true,
-  },
+    follow: true
+  }
 };
+
+
+
+
+// ---------------------------------
+// Fonts
+// ---------------------------------
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-sans"
 });
 
 const archivoBlack = Archivo_Black({
   subsets: ["latin"],
   weight: "400",
-  variable: "--font-display",
+  variable: "--font-display"
 });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+
+
+
+// ---------------------------------
+// RootLayout
+// ---------------------------------
+
+/**
+ * Shell shared by every page (header, footer, overlays, analytics)
+ */
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={[inter.variable, archivoBlack.variable, "font-display"].join(" ")} suppressHydrationWarning>
-      <head>
-      </head>
       <body>
         <Providers>
           <Header />

@@ -1,301 +1,342 @@
+/**
+ * Shared site constants
+ * - Skills shown in the Skills section (each description says where the skill was used)
+ * - Theme toggle disclaimers
+ */
+
+
+
+
+// ---------------------------------
+// Types
+// ---------------------------------
+
 export enum SkillNames {
   JS = "js",
-  HTML = "html",
-  CSS = "css",
-  NODEJS = "nodejs",
-  EXPRESS = "express",
-  POSTGRES = "postgres",
-  GIT = "git",
-  GITHUB = "github",
-  FIREBASE = "firebase",
-  LINUX = "linux",
-  AWS = "aws",
   PYTHON = "python",
-  JAVA = "java",
-  ARDUINO = "arduino",
-  SOLIDWORKS = "solidworks",
-  RASPBERRYPI = "raspberrypi",
-  CYPRESS = "cypress",
-  JIRA = "jira",
-  FUSION360 = "fusion360",
-  VERILOG = "verilog",
   C = "c",
   CPP = "cpp",
+  JAVA = "java",
+  VERILOG = "verilog",
+  NODEJS = "nodejs",
+  EXPRESS = "express",
+  FASTAPI = "fastapi",
+  LLM = "llm",
+  POSTGRES = "postgres",
+  MONGODB = "mongodb",
   SUPABASE = "supabase",
-  POSTMAN = "postman",
-  ROS = "ros",
+  FIRESTORE = "firestore",
+  SOLIDWORKS = "solidworks",
+  RASPBERRYPI = "raspberrypi",
+  ARDUINO = "arduino",
+  TIVAC = "tivac",
+  FUSION360 = "fusion360",
   FPGA = "fpga",
   OSCILLOSCOPE = "oscilloscope",
+  SOLDERING = "soldering",
+  PRINTING3D = "printing3d",
+  GIT = "git",
+  GITHUB = "github",
+  GITLAB = "gitlab",
+  LINUX = "linux",
+  BASH = "bash",
+  AWS = "aws",
   BITBUCKET = "bitbucket",
-  VIRTUALBOX = "virtualbox",
-  CONFLUENCE = "confluence",
+  CYPRESS = "cypress",
+  POSTMAN = "postman",
+  JIRA = "jira",
+  CONFLUENCE = "confluence"
 }
 
+
 export type Skill = {
-  id: number;
   name: string;
   label: string;
   shortDescription: string;
-  color: string;
-  icon: string;
+  color: string;  // Brand hex (chip highlight + fallback icon background)
+  icon: string;  // Empty string shows a lettered fallback
 };
+
+
+
+
+// ---------------------------------
+// Skills
+// ---------------------------------
+
+const DEVICON = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
 
 export const SKILLS: Record<SkillNames, Skill> = {
+  // Languages
   [SkillNames.JS]: {
-    id: 1,
     name: "js",
     label: "JavaScript",
-    shortDescription: "Primary language for frontend and full-stack web development.",
+    shortDescription: "My main language for backend work at Auto Ninjas and on hackathon projects.",
     color: "#f0db4f",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
-  },
-  [SkillNames.HTML]: {
-    id: 3,
-    name: "html",
-    label: "HTML",
-    shortDescription: "Used for structuring web content across projects.",
-    color: "#e34c26",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg",
-  },
-  [SkillNames.CSS]: {
-    id: 4,
-    name: "css",
-    label: "CSS",
-    shortDescription: "Used for styling and layout in web development work.",
-    color: "#563d7c",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
-  },
-  [SkillNames.NODEJS]: {
-    id: 9,
-    name: "nodejs",
-    label: "Node.js",
-    shortDescription: "Built production backends and REST APIs at Auto Ninjas.",
-    color: "#6cc24a",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
-  },
-  [SkillNames.EXPRESS]: {
-    id: 10,
-    name: "express",
-    label: "Express",
-    shortDescription: "Used to build and structure server-side routing and API endpoints.",
-    color: "#fff",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg",
-  },
-  [SkillNames.POSTGRES]: {
-    id: 11,
-    name: "postgres",
-    label: "PostgreSQL",
-    shortDescription: "Designed schemas and managed relational databases across multiple projects.",
-    color: "#336791",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
-  },
-  [SkillNames.GIT]: {
-    id: 13,
-    name: "git",
-    label: "Git",
-    shortDescription: "Version control across all projects and internships.",
-    color: "#f1502f",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
-  },
-  [SkillNames.GITHUB]: {
-    id: 14,
-    name: "github",
-    label: "GitHub",
-    shortDescription: "Used for code hosting, collaboration, and project management.",
-    color: "#94a3b8",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg",
-  },
-  [SkillNames.FIREBASE]: {
-    id: 17,
-    name: "firebase",
-    label: "Firestore",
-    shortDescription: "Used for caching and real-time data storage at Auto Ninjas.",
-    color: "#ffca28",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg",
-  },
-  [SkillNames.LINUX]: {
-    id: 19,
-    name: "linux",
-    label: "Linux",
-    shortDescription: "Used for development environments, scripting, and systems coursework.",
-    color: "#fff",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
-  },
-  [SkillNames.AWS]: {
-    id: 22,
-    name: "aws",
-    label: "AWS",
-    shortDescription: "Deployed and configured EC2, RDS, and related services at NourishLU.",
-    color: "#ff9900",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg",
+    icon: `${DEVICON}/javascript/javascript-original.svg`
   },
   [SkillNames.PYTHON]: {
-    id: 26,
     name: "python",
     label: "Python",
-    shortDescription: "Used for data analysis, scripting, and ML applications across research and coursework.",
+    shortDescription: "FastAPI services at DNV, data analysis for PlasTech research, and machine learning coursework.",
     color: "#3776ab",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
-  },
-  [SkillNames.JAVA]: {
-    id: 27,
-    name: "java",
-    label: "Java",
-    shortDescription: "Used for backend development and CLI tooling in software engineering coursework.",
-    color: "#007396",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
-  },
-  [SkillNames.ARDUINO]: {
-    id: 28,
-    name: "arduino",
-    label: "Arduino",
-    shortDescription: "Used for microcontroller programming and electronics prototyping at Wilbur Powerhouse.",
-    color: "#00979d",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/arduino/arduino-original.svg",
-  },
-  [SkillNames.SOLIDWORKS]: {
-    id: 29,
-    name: "solidworks",
-    label: "SolidWorks",
-    shortDescription: "Designed mechanical components for the LUSI science module, CSWA certified.",
-    color: "#e2001a",
-    icon: "",
-  },
-  [SkillNames.RASPBERRYPI]: {
-    id: 30,
-    name: "raspberrypi",
-    label: "Raspberry Pi",
-    shortDescription: "Configured for sensor communication and software integration on the LUSI science module.",
-    color: "#c51a4a",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/raspberrypi/raspberrypi-original.svg",
-  },
-  [SkillNames.CYPRESS]: {
-    id: 31,
-    name: "cypress",
-    label: "Cypress",
-    shortDescription: "Built and maintained end-to-end test suites at Auto Ninjas.",
-    color: "#69d3a7",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cypressio/cypressio-original.svg",
-  },
-  [SkillNames.JIRA]: {
-    id: 32,
-    name: "jira",
-    label: "Jira",
-    shortDescription: "Used for project and bug tracking at Auto Ninjas and LUSI.",
-    color: "#0052cc",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jira/jira-original.svg",
-  },
-  [SkillNames.FUSION360]: {
-    id: 33,
-    name: "fusion360",
-    label: "Fusion 360",
-    shortDescription: "Used for part modeling in lab and makerspace work.",
-    color: "#f26522",
-    icon: "",
-  },
-  [SkillNames.VERILOG]: {
-    id: 34,
-    name: "verilog",
-    label: "Verilog",
-    shortDescription: "Used for hardware description and FPGA design in digital systems coursework.",
-    color: "#7f52ff",
-    icon: "",
+    icon: `${DEVICON}/python/python-original.svg`
   },
   [SkillNames.C]: {
-    id: 35,
     name: "c",
     label: "C",
-    shortDescription: "Used for embedded systems programming on microcontrollers.",
+    shortDescription: "Embedded programming on microcontrollers, including the TM4C123 in Microcontroller Lab.",
     color: "#a8b9cc",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg",
+    icon: `${DEVICON}/c/c-original.svg`
   },
   [SkillNames.CPP]: {
-    id: 36,
     name: "cpp",
     label: "C++",
-    shortDescription: "Used in embedded and systems-level programming contexts.",
+    shortDescription: "Used in embedded and systems-level coursework.",
     color: "#00599c",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg",
+    icon: `${DEVICON}/cplusplus/cplusplus-original.svg`
+  },
+  [SkillNames.JAVA]: {
+    name: "java",
+    label: "Java",
+    shortDescription: "Wrote the backend and admin CLI for The Buzz, including hand-written OAuth token verification.",
+    color: "#007396",
+    icon: `${DEVICON}/java/java-original.svg`
+  },
+  [SkillNames.VERILOG]: {
+    name: "verilog",
+    label: "Verilog",
+    shortDescription: "Hardware description and FPGA design in FPGA Laboratory.",
+    color: "#7f52ff",
+    icon: ""
+  },
+
+  // Backend & AI
+  [SkillNames.NODEJS]: {
+    name: "nodejs",
+    label: "Node.js",
+    shortDescription: "Built production backends at Auto Ninjas (Express) and DNV (Koa).",
+    color: "#6cc24a",
+    icon: `${DEVICON}/nodejs/nodejs-original.svg`
+  },
+  [SkillNames.EXPRESS]: {
+    name: "express",
+    label: "Express",
+    shortDescription: "Routing and API endpoints for the Auto Ninjas AI backend and NourishLU.",
+    color: "#fff",
+    icon: `${DEVICON}/express/express-original.svg`
+  },
+  [SkillNames.FASTAPI]: {
+    name: "fastapi",
+    label: "FastAPI",
+    shortDescription: "Added correlation ID tracing and failure notifications to a FastAPI AI engine at DNV.",
+    color: "#009688",
+    icon: `${DEVICON}/fastapi/fastapi-original.svg`
+  },
+  [SkillNames.LLM]: {
+    name: "llm",
+    label: "LLM APIs & RAG",
+    shortDescription: "Integrated OpenAI at Auto Ninjas and LLaMA 3.1 at NourishLU, and monitored a production RAG pipeline at DNV.",
+    color: "#a78bfa",
+    icon: ""
+  },
+  [SkillNames.POSTGRES]: {
+    name: "postgres",
+    label: "PostgreSQL",
+    shortDescription: "Designed schemas and ran relational databases for The Buzz and NourishLU.",
+    color: "#336791",
+    icon: `${DEVICON}/postgresql/postgresql-original.svg`
+  },
+  [SkillNames.MONGODB]: {
+    name: "mongodb",
+    label: "MongoDB Atlas",
+    shortDescription: "Data layer for the MLOps services I worked on at DNV.",
+    color: "#47a248",
+    icon: `${DEVICON}/mongodb/mongodb-original.svg`
   },
   [SkillNames.SUPABASE]: {
-    id: 37,
     name: "supabase",
     label: "Supabase",
-    shortDescription: "Used as a backend database platform in software engineering coursework.",
+    shortDescription: "Backend database for The Buzz in Software Engineering.",
     color: "#3ecf8e",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg",
+    icon: `${DEVICON}/supabase/supabase-original.svg`
   },
-  [SkillNames.POSTMAN]: {
-    id: 38,
-    name: "postman",
-    label: "Postman",
-    shortDescription: "Used for REST API testing and validation at Auto Ninjas.",
-    color: "#ef5b25",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg",
+  [SkillNames.FIRESTORE]: {
+    name: "firestore",
+    label: "Firestore",
+    shortDescription: "Cached lease summaries for the Auto Ninjas AI backend.",
+    color: "#ffca28",
+    icon: `${DEVICON}/firebase/firebase-plain.svg`
   },
-  [SkillNames.ROS]: {
-    id: 39,
-    name: "ros",
-    label: "ROS",
-    shortDescription: "Used in a Ubuntu VirtualBox environment for rover software development at LUSI.",
-    color: "#22314e",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ros/ros-original.svg",
+
+  // Embedded & hardware
+  [SkillNames.SOLIDWORKS]: {
+    name: "solidworks",
+    label: "SolidWorks",
+    shortDescription: "Designed the LUSI science module (CSWA certified).",
+    color: "#e2001a",
+    icon: ""
+  },
+  [SkillNames.RASPBERRYPI]: {
+    name: "raspberrypi",
+    label: "Raspberry Pi",
+    shortDescription: "Set up the LUSI science module's dedicated Pi with an Ethernet connection for testing.",
+    color: "#c51a4a",
+    icon: `${DEVICON}/raspberrypi/raspberrypi-original.svg`
+  },
+  [SkillNames.ARDUINO]: {
+    name: "arduino",
+    label: "Arduino",
+    shortDescription: "Microcontroller programming and electronics prototyping.",
+    color: "#00979d",
+    icon: `${DEVICON}/arduino/arduino-original.svg`
+  },
+  [SkillNames.TIVAC]: {
+    name: "tivac",
+    label: "Tiva C",
+    shortDescription: "TM4C123 LaunchPad running the Simon game in Microcontroller Lab.",
+    color: "#cc0000",
+    icon: ""
+  },
+  [SkillNames.FUSION360]: {
+    name: "fusion360",
+    label: "Fusion 360",
+    shortDescription: "Part modeling in lab and makerspace work.",
+    color: "#f26522",
+    icon: ""
   },
   [SkillNames.FPGA]: {
-    id: 40,
     name: "fpga",
     label: "FPGA",
-    shortDescription: "Programmed using Verilog and Vivado in digital systems coursework.",
+    shortDescription: "Programmed with Verilog and Vivado in FPGA Laboratory.",
     color: "#7c3aed",
-    icon: "",
+    icon: ""
   },
   [SkillNames.OSCILLOSCOPE]: {
-    id: 41,
     name: "oscilloscope",
     label: "Oscilloscope",
-    shortDescription: "Used for debugging and validating hardware signals in microcontroller and FPGA lab work.",
+    shortDescription: "Debugging PWM and peripheral signals in Microcontroller and FPGA lab work.",
     color: "#22c55e",
-    icon: "",
+    icon: ""
+  },
+  [SkillNames.SOLDERING]: {
+    name: "soldering",
+    label: "Soldering",
+    shortDescription: "Hands-on electronics work on LUSI hardware and in lab coursework.",
+    color: "#94a3b8",
+    icon: ""
+  },
+  [SkillNames.PRINTING3D]: {
+    name: "printing3d",
+    label: "3D Printing",
+    shortDescription: "Fabricating science module parts for LUSI.",
+    color: "#f97316",
+    icon: ""
+  },
+
+  // Infrastructure
+  [SkillNames.GIT]: {
+    name: "git",
+    label: "Git",
+    shortDescription: "Version control across every project and internship.",
+    color: "#f1502f",
+    icon: `${DEVICON}/git/git-original.svg`
+  },
+  [SkillNames.GITHUB]: {
+    name: "github",
+    label: "GitHub",
+    shortDescription: "Code hosting and collaboration for LUSI and personal projects.",
+    color: "#94a3b8",
+    icon: `${DEVICON}/github/github-original.svg`
+  },
+  [SkillNames.GITLAB]: {
+    name: "gitlab",
+    label: "GitLab CI/CD",
+    shortDescription: "Merge requests and CI/CD pipelines across 8 repos at DNV.",
+    color: "#fc6d26",
+    icon: `${DEVICON}/gitlab/gitlab-original.svg`
+  },
+  [SkillNames.LINUX]: {
+    name: "linux",
+    label: "Linux",
+    shortDescription: "Development environments, servers, and systems coursework.",
+    color: "#fff",
+    icon: `${DEVICON}/linux/linux-original.svg`
+  },
+  [SkillNames.BASH]: {
+    name: "bash",
+    label: "Bash",
+    shortDescription: "Deployment and environment setup scripts, including NourishLU on EC2.",
+    color: "#4eaa25",
+    icon: `${DEVICON}/bash/bash-original.svg`
+  },
+  [SkillNames.AWS]: {
+    name: "aws",
+    label: "AWS",
+    shortDescription: "Deployed NourishLU on EC2 with RDS PostgreSQL, Nginx, and SSL.",
+    color: "#ff9900",
+    icon: `${DEVICON}/amazonwebservices/amazonwebservices-plain-wordmark.svg`
   },
   [SkillNames.BITBUCKET]: {
-    id: 42,
     name: "bitbucket",
     label: "Bitbucket",
-    shortDescription: "Used for branch management and code review at Auto Ninjas.",
+    shortDescription: "Branch management and code review at Auto Ninjas and on The Buzz.",
     color: "#0052cc",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bitbucket/bitbucket-original.svg",
+    icon: `${DEVICON}/bitbucket/bitbucket-original.svg`
   },
-  [SkillNames.VIRTUALBOX]: {
-    id: 43,
-    name: "virtualbox",
-    label: "VirtualBox",
-    shortDescription: "Used to run Ubuntu environments for ROS development at LUSI.",
-    color: "#1c6efe",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/virtualbox/virtualbox-original.svg",
+
+  // Testing & tools
+  [SkillNames.CYPRESS]: {
+    name: "cypress",
+    label: "Cypress",
+    shortDescription: "Rebuilt and expanded the end-to-end test suite at Auto Ninjas.",
+    color: "#69d3a7",
+    icon: `${DEVICON}/cypressio/cypressio-original.svg`
+  },
+  [SkillNames.POSTMAN]: {
+    name: "postman",
+    label: "Postman",
+    shortDescription: "REST API testing and validation at Auto Ninjas.",
+    color: "#ef5b25",
+    icon: `${DEVICON}/postman/postman-original.svg`
+  },
+  [SkillNames.JIRA]: {
+    name: "jira",
+    label: "Jira",
+    shortDescription: "Bug tracking at Auto Ninjas and project tracking for LUSI.",
+    color: "#0052cc",
+    icon: `${DEVICON}/jira/jira-original.svg`
   },
   [SkillNames.CONFLUENCE]: {
-    id: 44,
     name: "confluence",
     label: "Confluence",
-    shortDescription: "Built and maintained team documentation infrastructure at LUSI.",
+    shortDescription: "Reorganized LUSI's documentation twice, first for the science module and then club-wide.",
     color: "#0052cc",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/confluence/confluence-original.svg",
-  },
+    icon: `${DEVICON}/confluence/confluence-original.svg`
+  }
 };
 
+
+
+
+// ---------------------------------
+// Theme disclaimers
+// ---------------------------------
+
+// Toast text shown when the theme toggle is clicked (one picked at random)
 export const themeDisclaimers = {
   light: [
     "Warning: Light mode emits a gazillion lumens of pure radiance!",
     "Caution: Light mode ahead! Please don't try this at home.",
     "Only trained professionals can handle this much brightness. Proceed with sunglasses!",
     "Brace yourself! Light mode is about to make everything shine brighter than your future.",
-    "Flipping the switch to light mode... Are you sure your eyes are ready for this?",
+    "Flipping the switch to light mode... Are you sure your eyes are ready for this?"
   ],
   dark: [
     "Light mode? I thought you went insane... but welcome back to the dark side!",
     "Switching to dark mode... How was life on the bright side?",
-    "Dark mode activated! Thanks you from the bottom of my heart, and my eyes too.",
+    "Dark mode activated! Thank you from the bottom of my heart, and my eyes too.",
     "Welcome back to the shadows. How was life out there in the light?",
-    "Dark mode on! Finally, someone who understands true sophistication.",
-  ],
+    "Dark mode on! Finally, someone who understands true sophistication."
+  ]
 };
